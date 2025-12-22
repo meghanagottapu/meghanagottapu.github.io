@@ -108,15 +108,29 @@
     <section id="portfolio">
         <h2 class="section-title">Projects</h2>
         <div class="portfolio-grid">
-            <!-- Project 1 -->
             <div class="portfolio-item" onclick="expandProject(0)">
+                <h3>Explainable Multimodal Anomaly Detection for Surveillance Video</h3>
+                <p>DBuilt a deep learning sensor-fusion system combining spatial and temporal data for real-time
+                    predictive analytics.</p>
+                <p><strong>Tech:</strong> Python, PyTorch, Multimodal Learning, NLP, Explainable AI</p>
+                <div class="project-details" id="project-0">
+                    <!-- <p>Improved API latency by 35% and reduced system downtime by 40% through architectural optimization and asynchronous processing. Integrated secure data handling and advanced logging for real-time monitoring.</p> -->
+                     <p>Built an end-to-end multimodal anomaly detection system by fusing I3D video features with DistilBERT text embeddings using cross-modal attention on 1,800+ long surveillance videos (120+ hours) from the UCF-Crime/UCA dataset.</p>
+                     <p>Achieved AUC = 0.93 for anomaly classification under high-recall conditions and implemented temporal localization to predict start/end timestamps of anomalous events.</p>
+                     <p>Developed explainability mechanisms including attention visualization and Grad-CAM–based temporal importance, producing structured JSON outputs for interpretable model decisions.</p>
+                     <p>Conducted ablation studies and metric-driven evaluation to validate multimodal fusion, ensuring reproducible training and deployment-ready pipelines.
+                     </p>
+                </div>
+            </div>
+            <!-- Project 1
+            <div class="portfolio-item" onclick="expandProject(1)">
                 <h3>Fintech Microservices Platform</h3>
                 <p>Designed and implemented scalable microservices handling over one million monthly transactions.</p>
                 <p><strong>Tech:</strong> Node.js, MongoDB, RabbitMQ, Redis</p>
                 <div class="project-details" id="project-0">
                     <p>Improved API latency by 35% and reduced system downtime by 40% through architectural optimization and asynchronous processing. Integrated secure data handling and advanced logging for real-time monitoring.</p>
                 </div>
-            </div>
+            </div> -->
 
             <!-- Project 2 -->
             <div class="portfolio-item" onclick="expandProject(1)">
@@ -135,7 +149,7 @@
             </div>
 
             <!-- Project 3 -->
-            <div class="portfolio-item" onclick="expandProject(2)">
+            <!-- <div class="portfolio-item" onclick="expandProject(2)">
                 <h3>Explainable AI for Surveillance</h3>
                 <p>Built a deep learning sensor-fusion system combining spatial and temporal data for real-time
                     predictive analytics.</p>
@@ -143,9 +157,9 @@
                 <div class="project-details" id="project-2">
                     <p>Developed a sensor-fusion model using CNN and RNN to predict events in surveillance videos, improving system accuracy by 25% while keeping latency under 200ms for real-time applications.</p>
                 </div>
-            </div>
+            </div> -->
 
-            <div class="portfolio-item" onclick="expandProject(3)">
+            <div class="portfolio-item" onclick="expandProject(2)">
                 <h3>Language Identification System</h3>
                 <p>
                     Implemented word-level language identification for code-mixed
