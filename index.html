@@ -1,298 +1,916 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Meghana Gottapu | Software Engineer</title>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Meghana Gottapu — Software Engineer</title>
+<meta name="description" content="Meghana Gottapu — Graduate CS student at Rutgers with 3+ years building scalable backend systems, data pipelines, and AI/ML solutions."/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,700;1,400;1,500&family=DM+Sans:wght@300;400;500;600&family=JetBrains+Mono:wght@300;400;500&display=swap" rel="stylesheet"/>
+<style>
+/* =============================================
+   TOKENS
+============================================= */
+:root {
+  /* Palette: warm cream + dusty rose + slate indigo */
+  --cream:      #fdf9f4;
+  --cream2:     #f6f0e8;
+  --cream3:     #ede5d8;
+  --rose:       #c4748a;
+  --rose-l:     #d9a0b0;
+  --rose-d:     #a35570;
+  --rose-bg:    rgba(196,116,138,.09);
+  --rose-line:  rgba(196,116,138,.22);
+  --slate:      #3d4f6b;
+  --slate-l:    #6278a0;
+  --slate-bg:   rgba(61,79,107,.07);
+  --ink:        #1e2535;
+  --body:       #5c5768;
+  --muted:      #b8b0c4;
+  --border:     rgba(92,87,104,.14);
+  --borderl:    rgba(92,87,104,.08);
+  --white:      #ffffff;
+  --shadow-s:   0 2px 12px rgba(30,37,53,.06);
+  --shadow-m:   0 6px 28px rgba(30,37,53,.09);
+  --shadow-l:   0 16px 48px rgba(30,37,53,.12);
 
-    <meta name="description"
-        content="Meghana Gottapu – Software Engineer specializing in backend systems, microservices, and AI-powered applications." />
+  --serif: 'Playfair Display', Georgia, serif;
+  --sans:  'DM Sans', system-ui, sans-serif;
+  --mono:  'JetBrains Mono', monospace;
 
-    <!-- Font Awesome CDN for Icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
-    <link rel="stylesheet" href="index.css" />
+  --nav-h: 66px;
+  --ease:  cubic-bezier(.4,0,.2,1);
+}
+
+/* =============================================
+   RESET
+============================================= */
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:auto;font-size:16px}
+body{font-family:var(--sans);background:var(--cream);color:var(--body);line-height:1.7;overflow-x:hidden;-webkit-font-smoothing:antialiased}
+a{color:inherit;text-decoration:none}
+ul{list-style:none}
+::-webkit-scrollbar{width:3px}
+::-webkit-scrollbar-track{background:var(--cream2)}
+::-webkit-scrollbar-thumb{background:var(--rose);border-radius:2px}
+
+/* =============================================
+   NAVIGATION
+============================================= */
+#nav{
+  position:fixed;top:0;left:0;right:0;
+  height:var(--nav-h);z-index:900;
+  display:flex;align-items:center;
+  padding:0 clamp(1.4rem,5vw,5rem);
+  justify-content:space-between;
+  transition:background .3s var(--ease),box-shadow .3s var(--ease),border-color .3s var(--ease);
+  border-bottom:1px solid transparent;
+}
+#nav.solid{
+  background:rgba(253,249,244,.96);
+  backdrop-filter:blur(18px);
+  -webkit-backdrop-filter:blur(18px);
+  border-color:var(--border);
+  box-shadow:var(--shadow-s);
+}
+.nav-logo{
+  font-family:var(--serif);font-size:1.2rem;font-weight:500;
+  color:var(--ink);cursor:pointer;letter-spacing:.01em;
+  transition:color .2s;
+}
+.nav-logo span{color:var(--rose)}
+.nav-logo:hover{color:var(--rose)}
+
+.nav-list{display:flex;align-items:center;gap:2rem}
+.nav-list a{
+  font-family:var(--sans);font-size:.78rem;font-weight:500;
+  letter-spacing:.06em;text-transform:uppercase;color:var(--body);
+  position:relative;padding-bottom:3px;
+  transition:color .2s var(--ease);
+}
+.nav-list a::after{
+  content:'';position:absolute;bottom:0;left:0;
+  width:0;height:1.5px;background:var(--rose);
+  transition:width .28s var(--ease);
+}
+.nav-list a:hover,.nav-list a.active{color:var(--rose)}
+.nav-list a:hover::after,.nav-list a.active::after{width:100%}
+.nav-cta{
+  color:var(--rose)!important;
+  border:1.5px solid var(--rose)!important;
+  padding:.38rem 1rem!important;border-radius:4px;
+  transition:background .2s,color .2s!important;
+}
+.nav-cta::after{display:none!important}
+.nav-cta:hover{background:var(--rose)!important;color:#fff!important}
+
+/* hamburger */
+.hbg{display:none;flex-direction:column;gap:5px;cursor:pointer;background:none;border:none;padding:4px}
+.hbg i{display:block;width:22px;height:1.5px;background:var(--ink);border-radius:1px;transition:transform .3s var(--ease),opacity .3s var(--ease)}
+.hbg.open i:nth-child(1){transform:translateY(6.5px) rotate(45deg)}
+.hbg.open i:nth-child(2){opacity:0;transform:scaleX(0)}
+.hbg.open i:nth-child(3){transform:translateY(-6.5px) rotate(-45deg)}
+
+/* mobile overlay */
+#mob{
+  display:none;position:fixed;inset:0;z-index:800;
+  background:rgba(253,249,244,.97);
+  backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);
+  flex-direction:column;align-items:center;justify-content:center;gap:1.8rem;
+}
+#mob.open{display:flex}
+#mob a{
+  font-family:var(--serif);font-size:2.1rem;font-weight:400;
+  font-style:italic;color:var(--ink);
+  transition:color .2s;
+}
+#mob a:hover{color:var(--rose)}
+
+/* =============================================
+   HERO
+============================================= */
+#hero{
+  min-height:100vh;
+  display:flex;align-items:center;
+  padding:calc(var(--nav-h) + 4rem) clamp(1.4rem,5vw,5rem) 4rem;
+  background:var(--cream);
+  position:relative;overflow:hidden;
+}
+.hero-bg{
+  position:absolute;inset:0;pointer-events:none;
+  background:
+    radial-gradient(ellipse 55% 60% at 78% 20%, rgba(196,116,138,.10) 0%, transparent 70%),
+    radial-gradient(ellipse 40% 50% at 10% 85%, rgba(61,79,107,.06) 0%, transparent 65%);
+}
+.hero-dots{
+  position:absolute;inset:0;pointer-events:none;
+  background-image:radial-gradient(rgba(92,87,104,.12) 1px, transparent 1px);
+  background-size:28px 28px;
+  mask-image:radial-gradient(ellipse 70% 70% at 80% 30%, black 30%, transparent 75%);
+  -webkit-mask-image:radial-gradient(ellipse 70% 70% at 80% 30%, black 30%, transparent 75%);
+}
+
+.hero-inner{position:relative;z-index:1;max-width:660px}
+
+.hero-pill{
+  display:inline-flex;align-items:center;gap:.55rem;
+  font-family:var(--mono);font-size:.68rem;letter-spacing:.18em;
+  text-transform:uppercase;color:var(--rose);
+  background:var(--rose-bg);border:1px solid var(--rose-line);
+  padding:.32rem .85rem;border-radius:100px;
+  margin-bottom:1.6rem;
+  opacity:0;animation:fadeUp .7s .1s forwards;
+}
+.hero-pill-dot{width:6px;height:6px;border-radius:50%;background:var(--rose);animation:blink 2s infinite}
+
+.hero-name{
+  font-family:var(--serif);
+  font-size:clamp(2.8rem,6.5vw,5.4rem);
+  font-weight:500;line-height:1.06;
+  color:var(--ink);letter-spacing:-.02em;
+  margin-bottom:.85rem;
+  opacity:0;animation:fadeUp .7s .22s forwards;
+}
+.hero-name em{font-style:italic;color:var(--rose)}
+
+.hero-sub{
+  font-size:clamp(.93rem,1.7vw,1.08rem);font-weight:300;
+  color:var(--body);line-height:1.82;max-width:510px;
+  margin-bottom:2.4rem;
+  opacity:0;animation:fadeUp .7s .38s forwards;
+}
+.hero-sub strong{color:var(--ink);font-weight:500}
+
+.hero-btns{
+  display:flex;gap:.85rem;flex-wrap:wrap;
+  opacity:0;animation:fadeUp .7s .52s forwards;
+}
+.btn{
+  display:inline-flex;align-items:center;gap:.4rem;
+  font-family:var(--sans);font-size:.76rem;font-weight:600;
+  letter-spacing:.05em;text-transform:uppercase;
+  padding:.72rem 1.7rem;border-radius:5px;cursor:pointer;
+  transition:transform .2s var(--ease),box-shadow .25s var(--ease),background .2s,color .2s,border-color .2s;
+}
+.btn:hover{transform:translateY(-2px)}
+.btn-rose{
+  background:var(--rose);color:#fff;
+  border:1.5px solid var(--rose);
+  box-shadow:0 4px 18px rgba(196,116,138,.3);
+}
+.btn-rose:hover{background:var(--rose-d);border-color:var(--rose-d);box-shadow:0 8px 28px rgba(196,116,138,.38)}
+.btn-outline{
+  background:transparent;color:var(--ink);
+  border:1.5px solid var(--border);
+}
+.btn-outline:hover{border-color:var(--rose);color:var(--rose)}
+
+.hero-stats{
+  display:flex;gap:2.8rem;margin-top:3.2rem;
+  opacity:0;animation:fadeIn .8s .9s forwards;
+}
+.hs-num{font-family:var(--serif);font-size:2rem;font-weight:500;color:var(--rose);line-height:1}
+.hs-lbl{font-family:var(--mono);font-size:.59rem;letter-spacing:.13em;text-transform:uppercase;color:var(--muted);margin-top:.25rem}
+
+/* =============================================
+   SECTION BASE
+============================================= */
+section{padding:6rem clamp(1.4rem,5vw,5rem)}
+.wrap{max-width:1040px;margin:0 auto}
+
+.sh{display:flex;align-items:center;gap:1rem;margin-bottom:2.8rem}
+.sh-n{font-family:var(--mono);font-size:.62rem;letter-spacing:.2em;color:var(--rose);flex-shrink:0}
+.sh-t{font-family:var(--serif);font-size:clamp(1.65rem,3vw,2.4rem);font-weight:500;color:var(--ink)}
+.sh-r{flex:1;height:1px;background:var(--border)}
+
+/* reveal */
+.rv{opacity:0;transform:translateY(20px);transition:opacity .55s var(--ease),transform .55s var(--ease)}
+.rv.on{opacity:1;transform:none}
+
+/* =============================================
+   ABOUT
+============================================= */
+#about{background:var(--cream2)}
+.about-grid{display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:start}
+.about-copy p{font-size:.97rem;font-weight:300;color:var(--body);line-height:1.85;margin-bottom:1rem}
+.about-copy p b{color:var(--ink);font-weight:600}
+.pullquote{
+  font-family:var(--serif);font-style:italic;
+  font-size:1.1rem;color:var(--rose-d);
+  border-left:2px solid var(--rose);
+  padding:.9rem 1.3rem;
+  background:var(--rose-bg);
+  border-radius:0 6px 6px 0;
+  margin:1.5rem 0;line-height:1.55;
+}
+
+.card-stack{display:flex;flex-direction:column;gap:.7rem}
+.info-card{
+  display:flex;align-items:center;gap:.9rem;
+  background:var(--white);border:1px solid var(--border);
+  border-radius:9px;padding:.85rem 1.1rem;
+  box-shadow:var(--shadow-s);
+  transition:transform .2s var(--ease),box-shadow .2s var(--ease),border-color .2s var(--ease);
+}
+.info-card:hover{transform:translateX(4px);box-shadow:var(--shadow-m);border-color:var(--rose-line)}
+.ic-icon{font-size:1.05rem;flex-shrink:0}
+.ic-lbl{font-family:var(--mono);font-size:.57rem;letter-spacing:.13em;text-transform:uppercase;color:var(--muted)}
+.ic-val{font-size:.84rem;color:var(--ink);font-weight:500}
+
+/* =============================================
+   SKILLS
+============================================= */
+#skills{background:var(--cream)}
+.skills-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.1rem}
+.sk-card{
+  background:var(--white);border:1px solid var(--border);
+  border-radius:10px;padding:1.45rem;
+  box-shadow:var(--shadow-s);
+  transition:transform .25s var(--ease),box-shadow .25s var(--ease),border-color .25s var(--ease);
+}
+.sk-card:hover{transform:translateY(-3px);box-shadow:var(--shadow-l);border-color:var(--rose-line)}
+.sk-hd{display:flex;align-items:center;gap:.65rem;margin-bottom:1rem}
+.sk-ico{width:30px;height:30px;display:flex;align-items:center;justify-content:center;background:var(--rose-bg);border-radius:6px;font-size:.9rem}
+.sk-cat{font-family:var(--mono);font-size:.63rem;letter-spacing:.13em;text-transform:uppercase;color:var(--rose)}
+.tags{display:flex;flex-wrap:wrap;gap:.38rem}
+.tg{
+  font-family:var(--mono);font-size:.64rem;
+  color:var(--body);background:var(--cream2);
+  border:1px solid var(--border);border-radius:4px;
+  padding:.2rem .55rem;
+  transition:background .15s,color .15s,border-color .15s;
+}
+.tg:hover{background:var(--rose-bg);border-color:var(--rose-line);color:var(--rose-d)}
+
+/* =============================================
+   EXPERIENCE
+============================================= */
+#experience{background:var(--cream2)}
+.timeline{position:relative;padding-left:2rem}
+.timeline::before{
+  content:'';position:absolute;left:0;top:8px;bottom:0;width:1px;
+  background:linear-gradient(to bottom,var(--rose),rgba(196,116,138,0));
+}
+.tj{position:relative;margin-bottom:3rem}
+.tj:last-child{margin-bottom:0}
+.tj::before{
+  content:'';position:absolute;left:-2rem;top:8px;
+  width:9px;height:9px;border-radius:50%;
+  background:var(--rose);
+  border:2.5px solid var(--cream2);
+  box-shadow:0 0 0 1.5px var(--rose);
+}
+.tj-role{font-family:var(--serif);font-size:1.3rem;font-weight:500;color:var(--ink);margin-bottom:.22rem}
+.tj-meta{display:flex;align-items:center;gap:.75rem;flex-wrap:wrap;margin-bottom:.9rem}
+.tj-co{font-family:var(--mono);font-size:.7rem;letter-spacing:.05em;color:var(--rose)}
+.tj-sep{color:var(--muted)}
+.tj-dt{font-family:var(--mono);font-size:.67rem;color:var(--muted)}
+.tj-badge{
+  font-family:var(--mono);font-size:.58rem;letter-spacing:.07em;text-transform:uppercase;
+  background:var(--slate-bg);color:var(--slate-l);
+  border:1px solid rgba(61,79,107,.18);border-radius:100px;padding:.16rem .6rem;
+}
+.tj-pts{display:flex;flex-direction:column;gap:.5rem}
+.tj-pt{
+  display:flex;gap:.8rem;align-items:flex-start;
+  font-size:.9rem;color:var(--body);line-height:1.7;
+  background:var(--white);border:1px solid var(--border);
+  border-radius:7px;padding:.78rem .95rem;
+  box-shadow:var(--shadow-s);
+  transition:box-shadow .2s var(--ease),border-color .2s var(--ease);
+}
+.tj-pt:hover{box-shadow:var(--shadow-m);border-color:var(--rose-line)}
+.tj-dot{color:var(--rose);flex-shrink:0;margin-top:.28rem;font-size:.6rem}
+.tj-pt b{color:var(--rose-d);font-weight:600}
+
+/* =============================================
+   PROJECTS
+============================================= */
+#projects{background:var(--cream)}
+.proj-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1.2rem}
+.pj-card{
+  background:var(--white);border:1px solid var(--border);
+  border-radius:10px;padding:1.75rem;
+  position:relative;overflow:hidden;
+  box-shadow:var(--shadow-s);
+  transition:transform .25s var(--ease),box-shadow .25s var(--ease),border-color .25s var(--ease);
+}
+.pj-card::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:2px;
+  background:linear-gradient(90deg,var(--rose),var(--slate-l));
+  transform:scaleX(0);transform-origin:left;
+  transition:transform .3s var(--ease);
+}
+.pj-card:hover{transform:translateY(-4px);box-shadow:var(--shadow-l);border-color:var(--rose-line)}
+.pj-card:hover::before{transform:scaleX(1)}
+.pj-n{font-family:var(--mono);font-size:.6rem;letter-spacing:.15em;color:var(--muted);margin-bottom:.8rem}
+.pj-t{font-family:var(--serif);font-size:1.25rem;font-weight:500;color:var(--ink);margin-bottom:.55rem;line-height:1.25}
+.pj-d{font-size:.87rem;color:var(--body);line-height:1.72;margin-bottom:1rem;font-weight:300}
+.pj-badge{
+  display:inline-block;font-family:var(--mono);font-size:.66rem;
+  color:var(--rose-d);background:var(--rose-bg);
+  border:1px solid var(--rose-line);
+  padding:.25rem .65rem;border-radius:4px;margin-bottom:.9rem;
+}
+.pj-tech{display:flex;flex-wrap:wrap;gap:.34rem}
+.pt{
+  font-family:var(--mono);font-size:.62rem;
+  color:var(--body);background:var(--cream2);
+  border:1px solid var(--border);border-radius:3px;padding:.17rem .5rem;
+}
+
+/* =============================================
+   EDUCATION
+============================================= */
+#education{background:var(--cream2)}
+.edu-list{display:flex;flex-direction:column;gap:.95rem}
+.edu-card{
+  display:grid;grid-template-columns:52px 1fr auto;
+  align-items:center;gap:1.4rem;
+  background:var(--white);border:1px solid var(--border);
+  border-radius:10px;padding:1.5rem 1.7rem;
+  box-shadow:var(--shadow-s);
+  transition:transform .2s var(--ease),box-shadow .2s var(--ease),border-color .2s var(--ease);
+}
+.edu-card:hover{transform:translateX(5px);box-shadow:var(--shadow-m);border-color:var(--rose-line)}
+.edu-ico{font-size:1.65rem;text-align:center}
+.edu-deg{font-family:var(--serif);font-size:1.12rem;font-weight:500;color:var(--ink);margin-bottom:.18rem}
+.edu-sch{font-size:.85rem;color:var(--body);margin-bottom:.12rem}
+.edu-per{font-family:var(--mono);font-size:.63rem;letter-spacing:.05em;color:var(--muted)}
+.gpa{text-align:right}
+.gpa-v{font-family:var(--serif);font-size:1.85rem;font-weight:500;color:var(--rose);line-height:1}
+.gpa-l{font-family:var(--mono);font-size:.57rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-top:.12rem}
+
+/* =============================================
+   CONTACT
+============================================= */
+#contact{background:var(--cream)}
+.contact-center{max-width:700px;margin:0 auto;text-align:center}
+.contact-h{
+  font-family:var(--serif);
+  font-size:clamp(1.85rem,3.8vw,2.9rem);
+  font-weight:500;font-style:italic;
+  color:var(--ink);line-height:1.2;margin-bottom:.95rem;
+}
+.contact-h em{color:var(--rose);font-style:normal}
+.contact-sub{font-size:.96rem;font-weight:300;color:var(--body);line-height:1.82;margin-bottom:2.4rem}
+.c-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:.9rem;margin-bottom:2.2rem;text-align:left}
+.c-card{
+  display:flex;align-items:center;gap:.9rem;
+  background:var(--cream2);border:1px solid var(--border);
+  border-radius:9px;padding:1rem 1.2rem;
+  box-shadow:var(--shadow-s);
+  transition:transform .2s var(--ease),box-shadow .2s var(--ease),border-color .2s var(--ease);
+}
+.c-card:hover{transform:translateY(-2px);box-shadow:var(--shadow-m);border-color:var(--rose-line)}
+.c-ico{
+  width:38px;height:38px;flex-shrink:0;
+  display:flex;align-items:center;justify-content:center;
+  background:var(--white);border-radius:8px;font-size:.95rem;
+  border:1px solid var(--border);
+}
+.c-lbl{font-family:var(--mono);font-size:.57rem;letter-spacing:.13em;text-transform:uppercase;color:var(--muted)}
+.c-val{font-size:.83rem;color:var(--ink);font-weight:500;word-break:break-all}
+.cta-center{display:flex;justify-content:center}
+
+/* =============================================
+   FOOTER
+============================================= */
+footer{
+  background:var(--cream2);border-top:1px solid var(--border);
+  padding:1.5rem clamp(1.4rem,5vw,5rem);
+  display:flex;justify-content:space-between;align-items:center;
+}
+footer p{font-family:var(--mono);font-size:.63rem;letter-spacing:.05em;color:var(--muted)}
+
+/* =============================================
+   ANIMATIONS
+============================================= */
+@keyframes fadeUp  {from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:none}}
+@keyframes fadeIn  {from{opacity:0}to{opacity:1}}
+@keyframes blink   {0%,100%{opacity:1;transform:scale(1)}50%{opacity:.35;transform:scale(.68)}}
+
+/* =============================================
+   RESPONSIVE
+============================================= */
+@media(max-width:960px){
+  .skills-grid{grid-template-columns:repeat(2,1fr)}
+  .about-grid{grid-template-columns:1fr;gap:2.5rem}
+  .hero-stats{gap:2rem}
+}
+@media(max-width:640px){
+  .nav-list{display:none}
+  .hbg{display:flex}
+  section{padding:4rem 1.4rem}
+  #hero{padding:calc(var(--nav-h) + 2.5rem) 1.4rem 2.5rem}
+  .hero-name{font-size:clamp(2.3rem,10vw,3.2rem)}
+  .hero-btns{flex-direction:column;align-items:flex-start}
+  .hero-stats{gap:1.8rem}
+  .skills-grid{grid-template-columns:1fr}
+  .proj-grid{grid-template-columns:1fr}
+  .edu-card{grid-template-columns:auto 1fr}
+  .gpa{display:none}
+  .c-grid{grid-template-columns:1fr}
+  footer{flex-direction:column;gap:.3rem;text-align:center}
+  .sh-r{display:none}
+}
+</style>
 </head>
-
 <body>
 
-    <nav class="navbar">
-        <div class="nav-container">
-            <div class="logo">Meghana Gottapu</div>
-            <ul class="nav-links">
-                <li><a href="#home">Home</a></li>
-                <li><a href="#about">About</a></li>
-                <li><a href="#experience">Experience</a></li>
-                <li><a href="#skills">Skills</a></li>
-                <li><a href="#portfolio">Projects</a></li>
-                <li><a href="#contact">Contact</a></li>
-            </ul>
+<!-- ==================== NAV ==================== -->
+<nav id="nav">
+  <div class="nav-logo" id="logo-btn">Meghana <span>Gottapu</span></div>
+
+  <ul class="nav-list" id="nav-list">
+    <li><a href="#about"      data-s="about">About</a></li>
+    <li><a href="#skills"     data-s="skills">Skills</a></li>
+    <li><a href="#experience" data-s="experience">Experience</a></li>
+    <li><a href="#projects"   data-s="projects">Projects</a></li>
+    <li><a href="#education"  data-s="education">Education</a></li>
+    <li><a href="#contact"    data-s="contact" class="nav-cta">Contact</a></li>
+  </ul>
+
+  <button class="hbg" id="hbg" aria-label="Toggle menu"><i></i><i></i><i></i></button>
+</nav>
+
+<!-- mobile overlay -->
+<div id="mob">
+  <a href="#about">About</a>
+  <a href="#skills">Skills</a>
+  <a href="#experience">Experience</a>
+  <a href="#projects">Projects</a>
+  <a href="#education">Education</a>
+  <a href="#contact">Contact</a>
+</div>
+
+<!-- ==================== HERO ==================== -->
+<section id="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-dots"></div>
+  <div class="hero-inner">
+    <p class="hero-pill"><span class="hero-pill-dot"></span>Available for new opportunities</p>
+    <h1 class="hero-name">Meghana<br><em>Gottapu</em></h1>
+    <p class="hero-sub">
+      <strong>Software Engineer &amp; Data Specialist</strong> — building resilient backend systems,
+      intelligent data pipelines, and production-ready AI&nbsp;/&nbsp;ML solutions.
+    </p>
+    <div class="hero-btns">
+      <a href="#experience" class="btn btn-rose">View My Work ↓</a>
+      <a href="#contact"    class="btn btn-outline">Get in Touch →</a>
+    </div>
+    <div class="hero-stats">
+      <div><div class="hs-num">3+</div><div class="hs-lbl">Years Exp.</div></div>
+      <div><div class="hs-num">35%</div><div class="hs-lbl">Latency Cut</div></div>
+      <div><div class="hs-num">3.83</div><div class="hs-lbl">GPA Rutgers</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== ABOUT ==================== -->
+<section id="about">
+  <div class="wrap">
+    <div class="sh rv">
+      <span class="sh-n">01</span>
+      <h2 class="sh-t">About Me</h2>
+      <div class="sh-r"></div>
+    </div>
+    <div class="about-grid">
+      <div class="about-copy rv">
+        <p>I'm a <b>graduate Computer Science student at Rutgers University</b> with over 3 years of hands-on engineering experience — building systems that don't just work, but scale.</p>
+        <div class="pullquote">"I turn complex data challenges into clean, elegant engineering solutions."</div>
+        <p>From designing <b>high-volume microservices</b> that cut latency by 35%, to crafting <b>end-to-end data pipelines</b> and analytics dashboards that drive real business decisions — I thrive at the intersection of backend engineering, data science, and applied AI.</p>
+        <p>Currently pursuing my Master's with a <b>3.83 GPA</b> while actively seeking full-time summer internships in software engineering, data engineering, or ML engineering.</p>
+      </div>
+      <div class="card-stack rv">
+        <div class="info-card"><span class="ic-icon">🎓</span><div><div class="ic-lbl">Currently</div><div class="ic-val">Masters in Computer Scinence CS — Rutgers University</div></div></div>
+        <div class="info-card"><span class="ic-icon">📍</span><div><div class="ic-lbl">Location</div><div class="ic-val">New Brunswick, NJ, USA</div></div></div>
+        <div class="info-card"><span class="ic-icon">💼</span><div><div class="ic-lbl">Previous</div><div class="ic-val">Member of Technical Staff — Epikindifi</div></div></div>
+        <div class="info-card"><span class="ic-icon">⚡</span><div><div class="ic-lbl">Expertise</div><div class="ic-val">Backend · Data Pipelines · AI / ML</div></div></div>
+        <!-- <div class="info-card"><span class="ic-icon">🌐</span><div><div class="ic-lbl">Portfolio</div><div class="ic-val">meghanagottapu.github.io</div></div></div> -->
+        <!-- <div class="info-card"><span class="ic-icon">🎯</span><div><div class="ic-lbl">Open To</div><div class="ic-val">SWE · Data Eng · ML Engineering</div></div></div> -->
+         <div class="info-card"><span class="ic-icon">🎯</span><div><div class="ic-lbl">Open To</div><div class="ic-val">Summer Internships</div></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== SKILLS ==================== -->
+<section id="skills">
+  <div class="wrap">
+    <div class="sh rv">
+      <span class="sh-n">02</span>
+      <h2 class="sh-t">Technical Skills</h2>
+      <div class="sh-r"></div>
+    </div>
+    <div class="skills-grid">
+      <div class="sk-card rv">
+        <div class="sk-hd"><div class="sk-ico">🖥️</div><span class="sk-cat">Languages</span></div>
+        <div class="tags"><span class="tg">Python</span><span class="tg">JavaScript</span><span class="tg">Java</span><span class="tg">Bash</span><span class="tg">SQL</span><span class="tg">C / C++</span></div>
+      </div>
+      <div class="sk-card rv">
+        <div class="sk-hd"><div class="sk-ico">⚙️</div><span class="sk-cat">Backend &amp; Systems</span></div>
+        <div class="tags"><span class="tg">REST APIs</span><span class="tg">Microservices</span><span class="tg">JWT / OAuth</span><span class="tg">Distributed Systems</span><span class="tg">OOP &amp; DSA</span></div>
+      </div>
+      <div class="sk-card rv">
+        <div class="sk-hd"><div class="sk-ico">🗄️</div><span class="sk-cat">Databases</span></div>
+        <div class="tags"><span class="tg">PostgreSQL</span><span class="tg">MySQL</span><span class="tg">MongoDB</span><span class="tg">MS SQL</span><span class="tg">Data Modeling</span></div>
+      </div>
+      <div class="sk-card rv">
+        <div class="sk-hd"><div class="sk-ico">🤖</div><span class="sk-cat">AI / ML &amp; Data</span></div>
+        <div class="tags"><span class="tg">Pandas</span><span class="tg">NumPy</span><span class="tg">Scikit-learn</span><span class="tg">Feature Engineering</span><span class="tg">ETL Pipelines</span></div>
+      </div>
+      <div class="sk-card rv">
+        <div class="sk-hd"><div class="sk-ico">📡</div><span class="sk-cat">Messaging</span></div>
+        <div class="tags"><span class="tg">Apache Kafka</span><span class="tg">RabbitMQ</span><span class="tg">Event-Driven</span><span class="tg">Async Processing</span></div>
+      </div>
+      <div class="sk-card rv">
+        <div class="sk-hd"><div class="sk-ico">🛠️</div><span class="sk-cat">Tools &amp; Platforms</span></div>
+        <div class="tags"><span class="tg">Git / GitHub</span><span class="tg">Docker</span><span class="tg">AWS S3</span><span class="tg">CI / CD</span><span class="tg">Linux</span><span class="tg">Agile</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== EXPERIENCE ==================== -->
+<section id="experience">
+  <div class="wrap">
+    <div class="sh rv">
+      <span class="sh-n">03</span>
+      <h2 class="sh-t">Experience</h2>
+      <div class="sh-r"></div>
+    </div>
+    <div class="timeline">
+
+      <div class="tj rv">
+        <div class="tj-role">Member of Technical Staff</div>
+        <div class="tj-meta">
+          <span class="tj-co">Epikindifi — Chennai, India</span>
+          <span class="tj-sep">·</span>
+          <span class="tj-dt">Jun 2022 – Aug 2025</span>
+          <span class="tj-badge">Full-time</span>
         </div>
-    </nav>
-
-    <section id="home" class="hero">
-        <div class="hero-content">
-            <h1>Meghana Gottapu</h1>
-            <p class="tagline">Software Engineer | Backend Systems | Full-Stack Development | Data Science & AI
-                Enthusiast</p>
-            <p class="summary-line">
-                Master’s in Computer Science student at Rutgers University with 3+ years of software engineering
-                experience delivering high-performance, testable, and maintainable code in production systems.
-            </p>
-            <div class="contact">
-                <a href="mailto:meghanagottapu@gmail.com" class="btn"><i class="fas fa-envelope"></i> Email</a>
-                <a href="https://linkedin.com/in/meghanagottapu/" class="btn"><i class="fab fa-linkedin"></i>
-                    LinkedIn</a>
-                <a href="https://github.com/meghanagottapu" class="btn"><i class="fab fa-github"></i> GitHub</a>
-            </div>
+        <div class="tj-pts">
+          <div class="tj-pt"><span class="tj-dot">◆</span><span>Engineered scalable backend microservices for high-volume transactions, achieving a <b>35% reduction in end-to-end latency</b> through targeted profiling and architectural improvements.</span></div>
+          <div class="tj-pt"><span class="tj-dot">◆</span><span>Designed and shipped <b>RESTful APIs, JWT / OAuth authentication</b>, and data-validation pipelines deployed across multiple production applications.</span></div>
+          <div class="tj-pt"><span class="tj-dot">◆</span><span>Built <b>internal analytics dashboards</b> surfacing system performance, customer behaviour, and operational KPIs — improving visibility and data-driven decision-making.</span></div>
+          <div class="tj-pt"><span class="tj-dot">◆</span><span>Architected relational and NoSQL data models that <b>improved query performance and reporting accuracy</b> across core business workflows.</span></div>
+          <div class="tj-pt"><span class="tj-dot">◆</span><span>Led production debugging and root-cause analysis; contributed to <b>CI / CD testing pipelines</b> and rigorous code reviews.</span></div>
+          <div class="tj-pt"><span class="tj-dot">◆</span><span>Collaborated in <b>Agile sprints</b> with engineering, product, QA, and design — consistently delivering reliable, production-ready features on schedule.</span></div>
         </div>
-    </section>
+      </div>
 
-    <section id="about">
-        <h2 class="section-title">About</h2>
-        <div class="about-content">
-            <p>
-                I am a Computer Science graduate student at Rutgers University with over
-                three years of professional experience in software engineering.
-                My background includes building scalable backend systems, designing
-                RESTful APIs, and developing AI-powered applications.
-            </p>
-
-            <p>
-                At Epikindifi, I worked on fintech microservices processing over one million
-                monthly transactions. I improved system performance by 35% and reduced
-                downtime through optimized architecture and asynchronous processing.
-            </p>
-
-            <p>
-                My interests include distributed systems, cloud-native development,
-                applied machine learning, and building reliable software at scale.
-            </p>
+      <div class="tj rv">
+        <div class="tj-role">Backend Developer Intern</div>
+        <div class="tj-meta">
+          <span class="tj-co">Epikindifi — Chennai, India</span>
+          <span class="tj-sep">·</span>
+          <span class="tj-dt">Jan 2022 – Jun 2022</span>
+          <span class="tj-badge">Internship</span>
         </div>
-    </section>
-
-    <section id="experience">
-        <h2 class="section-title">Experience</h2>
-
-        <div class="experience-item">
-            <h3>Member of Technical Staff — Epikindifi</h3>
-            <span class="experience-meta">Chennai, India | Jun 2022 – Aug 2025</span>
-
-            <ul>
-                <li>Engineered and scaled fintech microservices handling <strong>1M+ monthly transactions</strong>,
-                    improving system performance by <strong>35%</strong>.</li>
-                <li>Designed and implemented secure <strong>REST APIs</strong> with JWT/OAuth authentication and
-                    third-party integrations.</li>
-                <li>Collaborated with product, design, and QA teams on system architecture, API contracts, and feature
-                    delivery.</li>
-                <li>Led code reviews and enforced Git workflows, reducing production defects by <strong>20%</strong>.
-                </li>
-                <li>Performed end-to-end debugging, monitoring, and root-cause analysis across production environments.
-                </li>
-            </ul>
-
-            <p class="tech-stack">
-                <strong>Tech:</strong> Node.js, JavaScript, REST APIs, SQL/NoSQL, JWT, OAuth, Git, Agile
-            </p>
+        <div class="tj-pts">
+          <div class="tj-pt"><span class="tj-dot">◆</span><span>Supported full-stack feature development; gained hands-on proficiency in <b>debugging, testing, and Git</b> within an Agile environment.</span></div>
+          <div class="tj-pt"><span class="tj-dot">◆</span><span>Contributed to production-issue resolution and deployment validation, building strong foundations in <b>software reliability</b>.</span></div>
         </div>
+      </div>
 
-        <div class="experience-item">
-            <h3>Backend Developer Intern — Epikindifi</h3>
-            <span class="experience-meta">Chennai, India | Jan 2022 – Jun 2022</span>
-
-            <ul>
-                <li>Built backend modules using JavaScript, PHP, and MySQL following MVC architecture.</li>
-                <li>Designed database schemas and CRUD APIs for production use.</li>
-                <li>Delivered a client project independently from requirements to deployment.</li>
-            </ul>
-
-            <p class="tech-stack">
-                <strong>Tech:</strong> JavaScript, PHP, MySQL, MVC
-            </p>
+      <div class="tj rv">
+        <div class="tj-role">Backend Developer Intern</div>
+        <div class="tj-meta">
+          <span class="tj-co">GoCrackIT</span>
+          <span class="tj-sep">·</span>
+          <span class="tj-dt">Mar 2020 – May 2020</span>
+          <span class="tj-badge">Internship</span>
         </div>
-
-        <div class="experience-item">
-            <h3>Backend Developer Intern — GoCrackIT</h3>
-            <span class="experience-meta">Mar 2020 – May 2020</span>
-
-            <ul>
-                <li>Developed a customer-facing Telegram chatbot using JavaScript and NLP.</li>
-                <li>Improved client onboarding and user engagement through automation.</li>
-            </ul>
-
-            <p class="tech-stack">
-                <strong>Tech:</strong> JavaScript, NLP, Chatbots
-            </p>
+        <div class="tj-pts">
+          <div class="tj-pt"><span class="tj-dot">◆</span><span>Built a production-facing <b>NLP-powered customer chatbot</b> in JavaScript, integrating backend services for automated context-aware interactions.</span></div>
+          <div class="tj-pt"><span class="tj-dot">◆</span><span>Strengthened core engineering fundamentals through <b>iterative development and debugging</b> cycles.</span></div>
         </div>
-    </section>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ==================== PROJECTS ==================== -->
+<section id="projects">
+  <div class="wrap">
+    <div class="sh rv">
+      <span class="sh-n">04</span>
+      <h2 class="sh-t">Projects</h2>
+      <div class="sh-r"></div>
+    </div>
+    <div class="proj-grid">
+
+      <div class="pj-card rv">
+        <div class="pj-n">PROJECT 01</div>
+        <h3 class="pj-t">Explainable Multimodal Anomaly Detection for Surveillance Video</h3>
+        <!-- <p class="pj-d">Built a deep learning sensor-fusion system combining spatial and temporal data for real-time predictive analytics.</p> -->
+        <p class="pj-d">Built an end-to-end multimodal anomaly detection system by fusing I3D video features with DistilBERT text embeddings using cross-modal attention on UCF-Crime/UCA dataset.</p>
+        <!-- <div class="pj-badge">⚡ 35% latency reduction in production</div> -->
+        <div class="pj-tech"><span class="pt">Python</span><span class="pt">PyTorch</span><span class="pt">Multimodal Learning</span><span class="pt">NLP</span><span class="pt">Explainable AI</span></div>
+      </div>
+
+      <div class="pj-card rv">
+        <div class="pj-n">PROJECT 02</div>
+        <h3 class="pj-t">BuyMe E-Commerce Platform</h3>
+        <p class="pj-d">Developed a multi-role e-commerce application with role-based authentication, REST APIs, and MVC architecture.</p>
+        <!-- <div class="pj-badge">⚡ 35% latency reduction in production</div> -->
+        <div class="pj-tech"><span class="pt">Python</span><span class="pt">Flask</span><span class="pt">SQLite</span><span class="pt">REST APIs</span></div>
+      </div>
+
+      <div class="pj-card rv">
+        <div class="pj-n">PROJECT 03</div>
+        <h3 class="pj-t">Language Identification System</h3>
+        <p class="pj-d">Implemented word-level language identification for code-mixed social media text using LSTM and Bi-LSTM models.</p>
+        <!-- <div class="pj-badge">⚡ 35% latency reduction in production</div> -->
+        <div class="pj-tech"><span class="pt">Python</span><span class="pt">NLP</span><span class="pt">LSTM</span></div>
+      </div>
 
 
-    <section id="skills">
-        <h2 class="section-title">Technical Skills</h2>
-        <div class="skills-grid">
-            <div class="skill-category">
-                <h3>Backend & APIs</h3>
-                <p>Node.js, Express.js, Python, Flask, REST APIs, Microservices</p>
-            </div>
+      <!-- <div class="pj-card rv">
+        <div class="pj-n">PROJECT 01</div>
+        <h3 class="pj-t">High-Throughput Microservices Platform</h3>
+        <p class="pj-d">Distributed microservices architecture handling high-volume transactional workloads with Kafka-based communication, JWT auth, and horizontal scaling.</p>
+        <div class="pj-badge">⚡ 35% latency reduction in production</div>
+        <div class="pj-tech"><span class="pt">Python</span><span class="pt">REST APIs</span><span class="pt">Kafka</span><span class="pt">PostgreSQL</span><span class="pt">Docker</span></div>
+      </div>
 
-            <div class="skill-category">
-                <h3>Databases</h3>
-                <p>MongoDB, PostgreSQL, MySQL, Redis</p>
-            </div>
+      <div class="pj-card rv">
+        <div class="pj-n">PROJECT 02</div>
+        <h3 class="pj-t">Operational Analytics Dashboard</h3>
+        <p class="pj-d">Real-time internal analytics platform visualising system performance, customer behaviour funnels, and operational KPIs for data-driven stakeholder decisions.</p>
+        <div class="pj-badge">📊 Org-wide visibility improvement</div>
+        <div class="pj-tech"><span class="pt">JavaScript</span><span class="pt">SQL</span><span class="pt">Data Visualisation</span><span class="pt">ETL</span></div>
+      </div>
 
-            <div class="skill-category">
-                <h3>AI & Machine Learning</h3>
-                <p>TensorFlow, Keras, PyTorch, NLP, CNNs, RNNs, LSTM</p>
-            </div>
+      <div class="pj-card rv">
+        <div class="pj-n">PROJECT 03</div>
+        <h3 class="pj-t">Intelligent Customer Chatbot</h3>
+        <p class="pj-d">Production NLP chatbot in JavaScript for automated, context-aware interactions — integrated with multiple backend APIs for real-time retrieval and session management.</p>
+        <div class="pj-badge">🤖 Automated customer workflows</div>
+        <div class="pj-tech"><span class="pt">JavaScript</span><span class="pt">NLP</span><span class="pt">Node.js</span><span class="pt">REST APIs</span></div>
+      </div>
 
-            <div class="skill-category">
-                <h3>Cloud & DevOps</h3>
-                <p>Google Cloud Platform, Docker, CI/CD, GitHub</p>
-            </div>
+      <div class="pj-card rv">
+        <div class="pj-n">PROJECT 04</div>
+        <h3 class="pj-t">ML-Driven Data Pipeline</h3>
+        <p class="pj-d">End-to-end data pipeline with feature engineering, model training, and evaluation using Scikit-learn for predictive modelling on structured enterprise datasets.</p>
+        <div class="pj-badge">🔬 End-to-end ML automation</div>
+        <div class="pj-tech"><span class="pt">Python</span><span class="pt">Pandas</span><span class="pt">Scikit-learn</span><span class="pt">NumPy</span><span class="pt">ETL</span></div>
+      </div> -->
 
-            <div class="skill-category">
-                <h3>Messaging & Systems</h3>
-                <p>RabbitMQ, Kafka, System Design, Performance Optimization</p>
-            </div>
+    </div>
+  </div>
+</section>
 
-            <div class="skill-category">
-                <h3>Languages</h3>
-                <p>JavaScript, Python, C/C++, SQL</p>
-            </div>
+<!-- ==================== EDUCATION ==================== -->
+<section id="education">
+  <div class="wrap">
+    <div class="sh rv">
+      <span class="sh-n">05</span>
+      <h2 class="sh-t">Education</h2>
+      <div class="sh-r"></div>
+    </div>
+    <div class="edu-list">
+
+      <div class="edu-card rv">
+        <div class="edu-ico">🏛️</div>
+        <div>
+          <div class="edu-deg">Master of Science — Computer Science</div>
+          <div class="edu-sch">Rutgers University, New Brunswick, NJ</div>
+          <div class="edu-per">Sep 2025 – May 2027 (Expected)</div>
         </div>
-    </section>
+        <div class="gpa"><div class="gpa-v">3.83</div><div class="gpa-l">GPA / 4.0</div></div>
+      </div>
 
-    <section id="portfolio">
-        <h2 class="section-title">Projects</h2>
-        <div class="portfolio-grid">
-            <div class="portfolio-item" onclick="expandProject(0)">
-                <h3>Explainable Multimodal Anomaly Detection for Surveillance Video</h3>
-                <p>DBuilt a deep learning sensor-fusion system combining spatial and temporal data for real-time
-                    predictive analytics.</p>
-                <p><strong>Tech:</strong> Python, PyTorch, Multimodal Learning, NLP, Explainable AI</p>
-                <div class="project-details" id="project-0">
-                    <!-- <p>Improved API latency by 35% and reduced system downtime by 40% through architectural optimization and asynchronous processing. Integrated secure data handling and advanced logging for real-time monitoring.</p> -->
-                    <p>Built an end-to-end multimodal anomaly detection system by fusing I3D video features with
-                        DistilBERT text embeddings using cross-modal attention on 1,800+ long surveillance videos (120+
-                        hours) from the UCF-Crime/UCA dataset.</p>
-                    <p>Achieved AUC = 0.93 for anomaly classification under high-recall conditions and implemented
-                        temporal localization to predict start/end timestamps of anomalous events.</p>
-                    <p>Developed explainability mechanisms including attention visualization and Grad-CAM–based temporal
-                        importance, producing structured JSON outputs for interpretable model decisions.</p>
-                    <p>Conducted ablation studies and metric-driven evaluation to validate multimodal fusion, ensuring
-                        reproducible training and deployment-ready pipelines.
-                    </p>
-                </div>
-            </div>
-            <!-- Project 1
-            <div class="portfolio-item" onclick="expandProject(1)">
-                <h3>Fintech Microservices Platform</h3>
-                <p>Designed and implemented scalable microservices handling over one million monthly transactions.</p>
-                <p><strong>Tech:</strong> Node.js, MongoDB, RabbitMQ, Redis</p>
-                <div class="project-details" id="project-0">
-                    <p>Improved API latency by 35% and reduced system downtime by 40% through architectural optimization and asynchronous processing. Integrated secure data handling and advanced logging for real-time monitoring.</p>
-                </div>
-            </div> -->
-
-            <!-- Project 2 -->
-            <div class="portfolio-item" onclick="expandProject(1)">
-                <h3>BuyMe E-Commerce Platform</h3>
-                <p>Developed a multi-role e-commerce application with role-based authentication, REST APIs, and MVC
-                    architecture.</p>
-                <p><strong>Tech:</strong> Flask, SQLite, REST APIs</p>
-                <div class="project-details" id="project-1">
-                    <!-- <p>Implemented role-based access control and integrated Stripe for payment processing. Optimized product management and checkout workflows for performance and scalability.</p> -->
-                    <p> Developed a complete full-stack web application with role-based authentication, secure session
-                        management, and structured MVC design.</pp>
-                    <p> Implemented REST API endpoints, product workflows, CRUD operations, and reusable service
-                        components using Flask.</pp>
-                    <p> Integrated SQLAlchemy ORM for relational modeling and optimized SQL queries.</pp>
-                    <p> Collaborated on UI flow, component layouts, and UX improvements, ensuring consistent state
-                        handling and intuitive navigation.</pp>
-                    <p> Architected a modular backend for testability, maintainability, and clean state management.</pp>
-                </div>
-            </div>
-
-            <!-- Project 3 -->
-            <!-- <div class="portfolio-item" onclick="expandProject(2)">
-                <h3>Explainable AI for Surveillance</h3>
-                <p>Built a deep learning sensor-fusion system combining spatial and temporal data for real-time
-                    predictive analytics.</p>
-                <p><strong>Tech:</strong> TensorFlow, CNN, RNN</p>
-                <div class="project-details" id="project-2">
-                    <p>Developed a sensor-fusion model using CNN and RNN to predict events in surveillance videos, improving system accuracy by 25% while keeping latency under 200ms for real-time applications.</p>
-                </div>
-            </div> -->
-
-            <div class="portfolio-item" onclick="expandProject(2)">
-                <h3>Language Identification System</h3>
-                <p>
-                    Implemented word-level language identification for code-mixed
-                    social media text using LSTM and Bi-LSTM models.
-                </p>
-                <p><strong>Tech:</strong> Python, NLP, LSTM</p>
-                <div class="project-details" id="project-3">
-                    <!-- <p>Developed a sensor-fusion model using CNN and RNN to predict events in surveillance videos, improving system accuracy by 25% while keeping latency under 200ms for real-time applications.</p> -->
-                    <p> Built an end-to-end deep learning pipeline for multilingual text classification using
-                        LSTM/BiLSTM.</p>
-                    <p> Developed LSTM/BiLSTM models for word-level identification in multilingual social media
-                        datasets.</p>
-                    <p> Processed unstructured text, optimized preprocessing pipelines (tokenization, cleaning, vocab
-                        handling), and structured outputs into tabular datasets.</p>
-                    <p> Applied classical NLP techniques to evaluate model performance.</p>
-                </div>
-            </div>
-
+      <div class="edu-card rv">
+        <div class="edu-ico">📊</div>
+        <div>
+          <div class="edu-deg">Diploma — Data Science</div>
+          <div class="edu-sch">Indian Institute of Technology, Madras</div>
+          <div class="edu-per">Jan 2021 – Sep 2024</div>
         </div>
-    </section>
+        <div class="gpa"><div class="gpa-v" style="font-size:1.15rem;line-height:1.3">IIT<br>Madras</div></div>
+      </div>
 
-    <section id="contact">
-        <h2 class="section-title">Contact</h2>
-        <div class="contact-info">
-            <p><strong>Email:</strong> <a href="mailto:meghanagottapu@gmail.com">meghanagottapu@gmail.com</a></p>
-            <p><strong>Phone:</strong> <a href="tel:+18483835365">+1 848 383 5365</a></p>
-            <p><strong>Location:</strong> New Brunswick, New Jersey</p>
-            <p>
-                <strong>LinkedIn:</strong>
-                <a href="https://linkedin.com/in/meghanagottapu" target="_blank" rel="noopener">
-                    linkedin.com/in/meghanagottapu
-                </a>
-            </p>
-            <p>
-                <strong>GitHub:</strong>
-                <a href="https://github.com/meghanagottapu" target="_blank" rel="noopener">
-                    github.com/meghanagottapu
-                </a>
-            </p>
+      <div class="edu-card rv">
+        <div class="edu-ico">🎓</div>
+        <div>
+          <div class="edu-deg">Bachelor of Technology — Computer Science</div>
+          <div class="edu-sch">Amrita Vishwa Vidyapeetam, Amritapuri, India</div>
+          <div class="edu-per">Jun 2018 – Jun 2022</div>
         </div>
-    </section>
+        <div class="gpa"><div class="gpa-v">8.18</div><div class="gpa-l">GPA / 10</div></div>
+      </div>
 
-    <footer>
-        <p>© 2025 Meghana Gottapu</p>
-    </footer>
+    </div>
+  </div>
+</section>
 
-    <script>
-        function expandProject(projectId) {
-            const projectItems = document.querySelectorAll(".portfolio-item");
-            const projectDetails = document.getElementById(`project-${projectId}`);
-            const clickedItem = projectItems[projectId];
+<!-- ==================== CONTACT ==================== -->
+<section id="contact">
+  <div class="wrap">
+    <div class="contact-center">
+      <div class="rv">
+        <h2 class="contact-h">Let's build something <em>great</em> together.</h2>
+        <p class="contact-sub">I'm open to full-time roles in software engineering, data engineering, and ML engineering. Whether you have a position in mind or simply want to connect — I'd love to hear from you.</p>
+      </div>
+      <div class="c-grid rv">
+        <a href="mailto:meghanagottapu@gmail.com" class="c-card">
+          <div class="c-ico">✉️</div>
+          <div><div class="c-lbl">Email</div><div class="c-val">meghanagottapu@gmail.com</div></div>
+        </a>
+        <a href="tel:+18483835365" class="c-card">
+          <div class="c-ico">📞</div>
+          <div><div class="c-lbl">Phone</div><div class="c-val">+1 (848) 383-5365</div></div>
+        </a>
+        <a href="https://linkedin.com/in/meghanagottapu" target="_blank" rel="noopener" class="c-card">
+          <div class="c-ico">🔗</div>
+          <div><div class="c-lbl">LinkedIn</div><div class="c-val">linkedin.com/in/meghanagottapu</div></div>
+        </a>
+        <a href="https://github.com/meghanagottapu" target="_blank" rel="noopener" class="c-card">
+          <div class="c-ico">💻</div>
+          <div><div class="c-lbl">GitHub</div><div class="c-val">github.com/meghanagottapu</div></div>
+        </a>
+      </div>
+      <div class="cta-center rv">
+        <a href="mailto:meghanagottapu@gmail.com" class="btn btn-rose">Email Me Directly →</a>
+      </div>
+    </div>
+  </div>
+</section>
 
-            // Close all other expanded projects and reset their width
-            projectItems.forEach((item, index) => {
-                if (index !== projectId) {
-                    item.classList.remove("expanded");
-                }
-            });
+<!-- ==================== FOOTER ==================== -->
+<footer>
+  <p>© 2025 Meghana Gottapu — All rights reserved</p>
+  <p>Built with care · Hosted on GitHub Pages</p>
+</footer>
 
-            // Toggle the clicked project
-            clickedItem.classList.toggle("expanded");
+<!-- ==================== JS ==================== -->
+<script>
+(function () {
+  'use strict';
 
-            // Toggle the project details of the clicked item
-            projectDetails.classList.toggle("expanded");
+  var NAV_H = 66;
+
+  /* ── smooth scroll to section id ─── */
+  function goTo(id) {
+    var el = document.getElementById(id);
+    if (!el) return;
+    var y = el.getBoundingClientRect().top + window.pageYOffset - NAV_H;
+    window.scrollTo({ top: y, behavior: 'smooth' });
+    try { history.replaceState(null, '', '#' + id); } catch(e) {}
+  }
+
+  /* ── intercept every #hash link ──── */
+  document.addEventListener('click', function (e) {
+    var a = e.target.closest('a[href^="#"]');
+    if (!a) return;
+    var raw = a.getAttribute('href') || '';
+    var id  = raw.replace('#', '').trim();
+    if (!id) return;
+    e.preventDefault();
+    closeMob();
+    goTo(id);
+  });
+
+  /* ── logo → top ─────────────────── */
+  var logoBtn = document.getElementById('logo-btn');
+  if (logoBtn) {
+    logoBtn.addEventListener('click', function () {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+      try { history.replaceState(null, '', window.location.pathname); } catch(e) {}
+    });
+  }
+
+  /* ── navbar solid on scroll ──────── */
+  var navEl = document.getElementById('nav');
+  function setNavSolid() {
+    if (!navEl) return;
+    if (window.pageYOffset > 24) {
+      navEl.classList.add('solid');
+    } else {
+      navEl.classList.remove('solid');
+    }
+  }
+
+  /* ── active nav link ─────────────── */
+  var secs    = Array.prototype.slice.call(document.querySelectorAll('section[id]'));
+  var navAs   = Array.prototype.slice.call(document.querySelectorAll('#nav-list a[data-s]'));
+
+  function setActive() {
+    var cur = '';
+    for (var i = 0; i < secs.length; i++) {
+      if (window.pageYOffset >= secs[i].offsetTop - NAV_H - 60) {
+        cur = secs[i].id;
+      }
+    }
+    for (var j = 0; j < navAs.length; j++) {
+      if (navAs[j].dataset.s === cur) {
+        navAs[j].classList.add('active');
+      } else {
+        navAs[j].classList.remove('active');
+      }
+    }
+  }
+
+  window.addEventListener('scroll', function () {
+    setNavSolid();
+    setActive();
+  }, { passive: true });
+
+  setNavSolid();
+  setActive();
+
+  /* ── hamburger / mobile nav ──────── */
+  var hbgBtn = document.getElementById('hbg');
+  var mobEl  = document.getElementById('mob');
+
+  function closeMob() {
+    if (!mobEl || !hbgBtn) return;
+    mobEl.classList.remove('open');
+    hbgBtn.classList.remove('open');
+    document.body.style.overflow = '';
+  }
+
+  if (hbgBtn && mobEl) {
+    hbgBtn.addEventListener('click', function () {
+      var isOpen = mobEl.classList.toggle('open');
+      hbgBtn.classList.toggle('open', isOpen);
+      document.body.style.overflow = isOpen ? 'hidden' : '';
+    });
+  }
+
+  /* ── scroll reveal ───────────────── */
+  var rvEls = Array.prototype.slice.call(document.querySelectorAll('.rv'));
+
+  if ('IntersectionObserver' in window) {
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry, i) {
+        if (entry.isIntersecting) {
+          var el = entry.target;
+          var delay = (i % 5) * 55;
+          setTimeout(function () { el.classList.add('on'); }, delay);
+          io.unobserve(el);
         }
+      });
+    }, { threshold: 0.08, rootMargin: '0px 0px -20px 0px' });
 
-    </script>
+    rvEls.forEach(function (el) { io.observe(el); });
+  } else {
+    /* fallback: just show everything */
+    rvEls.forEach(function (el) { el.classList.add('on'); });
+  }
 
+  /* ── skill card stagger ──────────── */
+  var skCards = Array.prototype.slice.call(document.querySelectorAll('.sk-card'));
+  skCards.forEach(function (c, i) {
+    c.style.transitionDelay = (i * 0.05) + 's';
+  });
+
+}());
+</script>
 </body>
-
 </html>
